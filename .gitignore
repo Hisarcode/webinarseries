@@ -1,0 +1,13 @@
+application/logs/*
+!application/logs/index.html
+!application/logs/.htaccess
+/vendor/
+awal.txt
+application/views/pasien
+application/views/dokter
+application/third_party
+assets/plugins
+assets/vendor
+assets/pages
+assets/dist
+system

@@ -1,0 +1,14 @@
+.utama {
+  background-image: linear-gradient(180deg,#2090ec,#82b1ff) ;
+}
+
+.tombol{
+  background: #42A5F6;
+  border-color: #42A5F6;
+}
+
+.ilustrasi{
+  background-image: url(../img/illustration.png);
+  background-position: center;
+  background-size: cover;
+}
