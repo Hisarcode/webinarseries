@@ -2,22 +2,20 @@
 <html lang="en">
 
 <head>
-    <!--  BAGIAN META -->
     <?php $this->load->view('templates/meta'); ?>
 
-    <!--  JUDUL TAB HALAMAN -->
     <title><?= $title; ?></title>
 
-    <!-- BAGIAN STYLE -->
     <?php $this->load->view('templates/style'); ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link href="<?= base_url('assets/') ?>/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top">
+
     <!-- Page Wrapper -->
     <div id="wrapper">
-
-        <!-- BAGIAN SIDEBAR -->
         <?php $this->load->view('templates/sidebar'); ?>
 
         <!-- Content Wrapper -->
@@ -25,65 +23,75 @@
 
             <!-- Main Content -->
             <div id="content">
-
-                <!-- BAGIAN TOPBAR -->
                 <?php $this->load->view('templates/topbar'); ?>
-
-                <!-- Page Content -->
+                <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <h1 class="h3 mb-4 text-gray-800"><?= $title ?></h1>
 
-                    <div class="row justify-content center">
-                        <div class="col-md">
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md">
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md">
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
+
+                    <?php if ($this->session->flashdata('category_success')) : ?>
+                        <div class="alert alert-success" role="alert"> <?= $this->session->flashdata('category_success') ?> </div>
+                    <?php endif; ?>
+
+                    <?php if ($this->session->flashdata('category_error')) : ?>
+                        <div class="alert alert-danger" role="alert"> <?= $this->session->flashdata('category_error') ?> </div>
+                    <?php endif; ?>
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4"></div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Webinar</th>
+                                    <th>Jadwal</th>
+                                    <th>Narasumber</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-dark">
+                                <?php $i =  1; ?>
+
+                                <?php foreach ($webinar as $wb) : ?>
+                                    <tr>
+                                        <th><?= $i; ?></th>
+                                        <th><?= $wb['webinar_nama']; ?></th>
+                                        <th><?php $ymd = DateTime::createFromFormat('d/m/Y', $wb['tanggal'])->format('d F Y');
+                                            echo $ymd; ?> , <?= $wb['jam'] ?> WIB</th>
+                                        <th><?= $wb['narasumber'] ?></th>
+                                        <th>
+                                            <a href="<?= base_url() . 'peserta/detail_webinar/' . $wb['webinar_id']; ?>" class="btn btn-info btn-icon-split btn-sm">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </span>
+                                                <span class="text">Detail</span>
+                                            </a>
+                                            <?php if ($wb['is_register'] == 0) : ?>
+
+                                                <a href="<?= base_url() . 'peserta/registrasi_webinar/' . $wb['webinar_id'] . '/' . $user['id'] ?>" class="btn btn-success btn-icon-split btn-sm" onclick="return confirm('Yakin?');">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-check"></i>
+                                                    </span>
+                                                    <span class="text">Ikuti</span>
+                                                </a>
+                                            <?php endif; ?>
+
+                                        </th>
+                                    </tr>
+                                    <?php $i++; ?>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     </div>
 
-
                 </div>
-                <!-- End of Page Content -->
+                <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Main Content -->
 
-            <!-- BAGIAN FOOTER -->
             <?php $this->load->view('templates/footer'); ?>
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of  Wrapper -->
-
-    <!-- BAGIAN SCRIPT -->
-    <?php $this->load->view('templates/script') ?>
-
-</body>
-
-</html>
+            <?php $this->load->view('templates/logout_modal'); ?>
+            <?php $this->load->view('templates/script'); ?>
+            <script src="<?= base_url('assets/') ?>/vendor/datatables/jquery.dataTables.min.js"></script>
+            <script src="<?= base_url('assets/') ?>/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+            <script src="<?= base_url('assets/')  ?>/js/demo/datatables-demo.js"></script>
