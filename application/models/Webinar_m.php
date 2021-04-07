@@ -88,7 +88,7 @@ class Webinar_m extends CI_Model
         $this->db->select('*');
         $this->db->from($this->_table);
         $this->db->join('media', 'media_id = webinar_media_id');
-        $this->db->order_by('webinar_id', 'DESC');
+        $this->db->order_by('tanggal', 'DESC');
 
 
         return $this->db->get()->result_array();
@@ -141,7 +141,7 @@ class Webinar_m extends CI_Model
         $this->jam =  $post['jam'];
         $this->webinar_media_id = $post['media_id'];
         $this->deskripsi = nl2br($post['deskripsi']);
-        $this->deskripsi = $post['link_media'];
+        $this->link_media = $post['link_media'];
         $this->narasumber = $post['narasumber'];
         $this->created_at = date('Y-m-d H:i:s');
 
