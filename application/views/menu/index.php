@@ -112,6 +112,41 @@
     </div>
 
     <?php $this->load->view('templates/script') ?>
+    <script src="<?= base_url('assets/'); ?>js/script.js"></script>
+    <script>
+        $(function() {
+            $('.tambahMenuBtn').on('click', function() {
+                $('#tambahMenuModalLabel').html('Tambah Menu Baru');
+                $('.modal-footer button[type=submit]').html('Tambah');
+                $('.modal-body form').attr('action', 'http://localhost/webinarseries/menu/');
+                $('#menu').val('');
+
+            });
+
+
+            $('.tampilModalEditMenu').on('click', function() {
+                $('#tambahMenuModalLabel').html('Edit  Menu');
+                $('.modal-footer button[type=submit]').html('Edit Data');
+                $('.modal-body form').attr('action', 'http://localhost/webinarseries/menu/editmenu');
+
+                const id = $(this).data('id');
+
+                // jquery ajax, request data tanpa mereload seluruh halamannya 
+                $.ajax({
+                    url: 'http://localhost/webinarseries/menu/geteditmenu',
+                    data: {
+                        id: id
+                    },
+                    method: 'post',
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#id').val(data.id);
+                        $('#menu').val(data.menu);
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 
