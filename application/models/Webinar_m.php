@@ -23,6 +23,11 @@ class Webinar_m extends CI_Model
         $this->load->library('upload');
     }
 
+    public function getJumlahWebinar()
+    {
+        return $this->db->count_all($this->_table);
+    }
+
     private function _generateWebinarID()
     {
 
