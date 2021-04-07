@@ -55,6 +55,8 @@
     </div>
 
     <?php $this->load->view('templates/script') ?>
+    <?php $this->load->view('templates/logout_modal'); ?>
+
 
 </body>
 
