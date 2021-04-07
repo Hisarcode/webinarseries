@@ -36,14 +36,17 @@
                                     <?php if ($this->session->flashdata('category_error')) : ?>
                                         <div class="alert alert-danger" role="alert"> <?= $this->session->flashdata('category_error') ?> </div>
                                     <?php endif; ?>
-
-                                    <form class="user" method="POST" action="<?= base_url('auth'); ?>">
-                                        <div class="form-group">
+                                    <form class="user" autocomplete="new-password" method="POST" action="<?= base_url('auth'); ?>">
+                                        <a href="<?= $login_button ?>" class="btn btn-google btn-user btn-block mb-4">
+                                            <i class="fab fa-google fa-fw"></i> Login with Google
+                                        </a>
+                                        <hr>
+                                        <div class="form-group mt-4">
                                             <input type="text" class="form-control form-control-user" id="email" name="email" placeholder="Masukkan email Anda..." value="<?= set_value('email'); ?>">
                                             <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Masukkan Password Anda">
+                                            <input autocomplete="new-password" type="password" class="form-control form-control-user" id="password" name="password" placeholder="Masukkan Password Anda">
                                             <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
 
