@@ -58,9 +58,9 @@
                                 <p id="jamId">
 
                                     <input type="text" class="form-control time <?php echo form_error('jam') ? 'is-invalid' : '' ?>" name="jam" value="<?= set_value('jam'); ?>">
-                                <div class="invalid-feedback">
-                                    <?php echo form_error('jam') ?>
-                                </div><br><br>
+                                    <div class="invalid-feedback">
+                                        <?php echo form_error('jam') ?>
+                                    </div><br><br>
                                 </p>
                                 Media: <br>
                                 <select name="media_id" id="media_id" class="form-control <?php echo form_error('media_id') ? 'is-invalid' : '' ?>">
@@ -128,7 +128,7 @@
                 var timeOnlyDatepair = new Datepair(timeOnlyExampleEl);
 
                 $('#tanggalId .date').datepicker({
-                    'format': 'dd/mm/yyyy',
+                    'format': 'yyyy-mm-dd',
                     'autoclose': true
                 });
 
