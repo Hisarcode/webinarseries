@@ -78,10 +78,37 @@
                                 <br><br>
 
                                 Narasumber: <br>
-                                <input type="text" class="form-control <?php echo form_error('narasumber') ? 'is-invalid' : '' ?>" name="narasumber" value="<?= set_value('narasumber'); ?>">
-                                <div class="invalid-feedback">
-                                    <?php echo form_error('narasumber') ?>
-                                </div><br><br>
+                                <div class="row ml-0 after-add-more ">
+
+                                    <div class="col-6 p-0 ">
+                                        <input type="text" class="form-control <?php echo form_error('narasumber') ? 'is-invalid' : '' ?>" name="narasumber[]" value="<?= set_value('narasumber'); ?>">
+
+                                        <div class="invalid-feedback">
+                                            <?php echo form_error('narasumber') ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary add-more mt-2" type="button">
+                                    <i class="fas fa-plus"></i> Tambah Narasumber
+                                </button>
+
+                                <div class="copy invisible">
+                                    <div class="row control-group ml-0 mt-2 ">
+                                        <div class="col-6 p-0">
+                                            <input type="text" class="form-control <?php echo form_error('narasumber') ? 'is-invalid' : '' ?>" name="narasumber[]" value="<?= set_value('narasumber'); ?>">
+                                            <div class="invalid-feedback">
+                                                <?php echo form_error('narasumber') ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <button class="btn btn-danger remove" type="button"><i class="fas fa-minusx"></i> Remove</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
                                 Deskripsi:
                                 <textarea class="form-control <?php echo form_error('deskripsi') ? 'is-invalid' : '' ?>"" id=" deskripsi" name="deskripsi" rows="5" value="<?= set_value('deskripsi'); ?>"></textarea>
                                 <div class="invalid-feedback">
@@ -138,6 +165,20 @@
                 var datepair = new Datepair(basicExampleEl);
             </script>
 
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $(".add-more").click(function() {
+                        var html = $(".copy").html();
+
+                        $(".after-add-more").after(html);
+                    });
+
+                    // saat tombol remove dklik control group akan dihapus 
+                    $("body").on("click", ".remove", function() {
+                        $(this).parents(".control-group").remove();
+                    });
+                });
+            </script>
         </div>
 
     </div>
