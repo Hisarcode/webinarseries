@@ -54,7 +54,7 @@
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jumlah_webinar ?> Webinar</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-car fa-2x text-gray-300"></i>
+                                            <i class="fas fa-th fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -66,10 +66,10 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Webinar Selesai</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">10 Webinar</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jumlah_webinar_end ?> Webinar</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-car fa-2x text-gray-300"></i>
+                                            <i class="fas fa-check-square fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -80,11 +80,11 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Webinar Saat Ini</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">2 Webinar</div>
+                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Webinar Berikutnya</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jumlah_webinar_next ?> Webinar</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-car fa-2x text-gray-300"></i>
+                                            <i class="fas fa-angle-double-right fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
