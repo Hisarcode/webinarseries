@@ -46,6 +46,38 @@ class Panitia extends CI_Controller
         $this->load->view('panitia/inputsertifikat', $data);
     }
 
+    public function edit_sertifikat($idSertifikat = null)
+    {
+        if (!isset($idSertifikat)) redirect('panitia/inputsertifikat');
+
+        $data['title'] = 'Edit Sertifikat';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $sertifikat = $this->sertifikat;
+        $rules = [
+            [
+                'field' => 'tanggal_keluar',
+                'label' => 'Tanggal Keluar',
+                'rules' => 'required|trim',
+                'errors' => [
+                    'required' => 'Tanggal Keluar Belum  Diisi'
+                ]
+            ]
+        ];
+        $validation = $this->form_validation;
+        $validation->set_rules($rules);
+
+        if ($validation->run()) {
+
+            $sertifikat->updateDataSertifikat();
+            $this->session->set_flashdata('category_success', 'Data Berhasil Diubah');
+            redirect('panitia/inputsertifikat');
+        }
+
+        $data['sertifikat'] = $this->sertifikat->getSertifikatById($idSertifikat);
+
+        $this->load->view('panitia/edit_sertifikat', $data);
+    }
+
     public function webinar()
     {
         $data['title'] = 'Webinar';
