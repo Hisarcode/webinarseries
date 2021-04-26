@@ -46,7 +46,11 @@
                                     <?= form_error('passwordbaru2', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <div class="form-group">
+                                    <?php $role_id = $this->session->userdata('role_id'); ?>
+                                    <?php $role = ($role_id ==  3) ? "peserta" : "panitia"; ?>
                                     <button type="submit" class="btn btn-primary">Ubah Password Sekarang</button>
+                                    <a href="<?= base_url($role . '/profil') ?>" class="btn btn-secondary btn-user mt-2 mt-md-0">Batal</a>
+
                                 </div>
                             </form>
                         </div>
