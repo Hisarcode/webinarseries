@@ -167,4 +167,17 @@ class Peserta extends CI_Controller
             $this->load->view('peserta/unduh_sertifikat', $data);
         }
     }
+
+    public function profil()
+    {
+        $data['title'] = 'Profil';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->join('peserta', 'peserta.id_user = user.id');
+        $this->db->where('email', $this->session->userdata('email'));
+        $data['peserta'] = $this->db->get()->row_array();
+        $this->load->view('peserta/profil', $data);
+    }
 }
