@@ -62,11 +62,17 @@
                                             <h6 class="m-0 font-weight-bold text-primary"> Aksi </h6>
                                         </div>
                                         <div class="card-body text-justify">
-                                            <a href="" class="mb-3 btn btn-info btn-block">
+                                            <a href="<?= base_url('panitia/edit_profil') ?>" class="mb-3 btn btn-info btn-block">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-pen"></i>
                                                 </span>
                                                 <span class="text">Ubah Profil</span>
+                                            </a>
+                                            <a href="<?= base_url() . 'auth/ubahpassword' ?>" class="mb-3 btn btn-danger btn-block">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-key"></i>
+                                                </span>
+                                                <span class="text">Ubah Password</span>
                                             </a>
                                             <a href="<?= base_url('panitia') ?>" class="mb-3 btn btn-secondary  btn-block">
                                                 <span class="icon text-white-50">
