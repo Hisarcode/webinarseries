@@ -18,8 +18,8 @@
         <div class="row">
           <div class="col-lg">
             <div class="p-5">
-              <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Registrasi Webinar Informatika</h1>
+              <div class="text-center mb-3">
+                <img src="<?= base_url('assets/img/Webinar Series Biru.png') ?>" width="100%">
               </div>
               <form class="user" method="POST" autocomplete="off" action="<?= base_url('auth/registrasi'); ?>">
                 <div class="form-group">
