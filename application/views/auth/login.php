@@ -8,6 +8,13 @@
 
     <!-- Custom fonts for this template-->
     <?php $this->load->view('templates/style'); ?>
+
+    <style>
+        a,
+        a:hover {
+            color: #333
+        }
+    </style>
 </head>
 
 <body class="bg-gradient-primary utama">
@@ -38,15 +45,23 @@
                                         <div class="alert alert-danger" role="alert"> <?= $this->session->flashdata('category_error') ?> </div>
                                     <?php endif; ?>
 
-                                    <form class="user" autocomplete="new-password" method="POST" action="<?= base_url('auth'); ?>">
+                                    <form class="user" method="POST" action="<?= base_url('auth'); ?>" autocomplete="off">
 
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" id="email" name="email" placeholder="Masukkan email Anda..." value="<?= set_value('email'); ?>">
-                                            <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            <input type="text" class="form-control  " id="email" name="email" placeholder="Masukkan email Anda..." value="<?= set_value('email'); ?>">
+                                            <?= form_error('email', '<div class="invalid-feedback  d-block">', '</div>'); ?>
                                         </div>
+
+
                                         <div class="form-group">
-                                            <input autocomplete="new-password" type="password" class="form-control form-control-user" id="password" name="password" placeholder="Masukkan Password Anda">
-                                            <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            <div class="input-group" id="show_hide_password">
+                                                <input autocomplete="new-password" type="password" class="form-control " id="password" name="password" placeholder="Masukkan Password Anda">
+
+                                                <span class="input-group-addon border border-primary">
+                                                    <a href="" class="btn btn-default"><i class="my-auto fa fa-eye-slash" aria-hidden="true"></i></a>
+                                                </span>
+                                            </div>
+                                            <?= form_error('password', '<div class="invalid-feedback  d-block">', '</div>'); ?>
                                         </div>
 
                                         <button type="submit" class="btn btn-primary btn-user btn-block mb-2 tombol">
@@ -82,6 +97,22 @@
     </div>
 
     <?php $this->load->view('templates/script'); ?>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#show_hide_password a").on('click', function(event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').addClass("fa-eye-slash");
+                    $('#show_hide_password i').removeClass("fa-eye");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("fa-eye-slash");
+                    $('#show_hide_password i').addClass("fa-eye");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
