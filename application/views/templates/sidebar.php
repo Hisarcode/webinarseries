@@ -2,7 +2,7 @@
         <ul class="navbar-nav utama sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon ">
                     <img src="<?= base_url('assets/img/if_new.png') ?>" width="60" alt="">
                 </div>
@@ -37,14 +37,14 @@
 
                     <!-- SIAPKAN MENU SESUAI SUB-MENU -->
                     <?php
-                    $menuId = $m['id'];
-                    $querySubMenu = "SELECT *
+                            $menuId = $m['id'];
+                            $querySubMenu = "SELECT *
                             FROM `user_sub_menu`
                             WHERE `menu_id` = $menuId
                             AND `is_active` = 1
                         ";
-                    $subMenu = $this->db->query($querySubMenu)->result_array();
-                    ?>
+                            $subMenu = $this->db->query($querySubMenu)->result_array();
+                            ?>
 
                     <?php foreach ($subMenu as $sm) : ?>
 
