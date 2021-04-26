@@ -2,30 +2,15 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('assets/img/if_new_ico.gif') ?>" />
-    <meta name="description" content="Infomatika Webinar Series">
-    <meta name="author" content="Informatika Untan">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php $this->load->view('templates/meta'); ?>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <title><?= 'Detail ' . $webinar['webinar_nama']; ?></title>
+
+    <?php $this->load->view('templates/style'); ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-    <title><?= $webinar['webinar_nama'] ?></title>
-    <!-- custom style -->
-    <style>
-        .fw600 {
-            font-weight: 600;
-        }
-
-        .navbar-brand img {
-            height: 40% !important;
-            width: 40% !important;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="jquery.timepicker.css" />
+    <link rel="stylesheet" type="text/css" href="bootstrap-datepicker.css" />
 </head>
 
 <body style="font-family: 'Poppins', sans-serif;">
@@ -33,7 +18,7 @@
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="border-bottom: 1px solid #dee2e6 !important">
         <div class="container">
             <a class="navbar-brand text-uppercase fs-4 fw-bold d-flex" href="<?= base_url() ?>">
-                <img src="<?= base_url('assets/img/Webinar Series Biru.png') ?>" alt="Informatics Webinar Series" class="d-none d-md-flex">
+                <img src="<?= base_url('assets/img/Webinar Series Biru.png') ?>" alt="Informatics Webinar Series" class="d-none d-md-flex" style="height: 50px !important">
                 <span class="d-md-none text-primary">Webinar Series</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,12 +101,50 @@
                             </div>
                         </div>
                         <div class="col-lg-4">
+
                             <div class="card mb-4">
+
                                 <div class="card-header">
                                     <h6 class="m-0 font-weight-bold text-primary"> Aksi </h6>
                                 </div>
                                 <div class="card-body text-justify">
-                                    <a href="<?= base_url('auth/') ?>" class="mb-3 btn btn-info btn-block">
+                                    <?php $urlEncode = base_url() . 'w/' . strtr(base64_encode($webinar['webinar_id']), '+/=', '._-') ?>
+                                    <input type="text" class="form-control mb-2" value="<?= $urlEncode ?>" id="myInput" readonly>
+                                    <button onclick="myFunction()" href="<?= base_url('auth/') ?>" class="mb-3 btn btn-dark btn-block">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-clone"></i>
+                                        </span>
+                                        <span class="text">Salin Link</span>
+                                    </button>
+                                    <div class="row mb-2 justify-content-center">
+                                        <div class="col-lg font-weight-bold text-dark">
+
+
+                                            <h3 class="h5 g-color-gray-dark-v1 g-mb-10">Share With Friends</h3>
+                                            <div class="d-flex justify-content-center">
+
+                                                <ul class="list-inline mb-0">
+                                                    <li class="list-inline-item ">
+                                                        <a style="color:#2a1aaf;" href="https://www.facebook.com/sharer/sharer.php?u=<?= $urlEncode ?>" target="_blank">
+                                                            <i class="fab fa-facebook fa-2x"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="list-inline-item ">
+                                                        <a target="_blank" href="https://twitter.com/share?url=<?= $urlEncode ?>">
+                                                            <i class="fab fa-twitter fa-2x"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="list-inline-item ">
+                                                        <a target="_blank" href="https://api.whatsapp.com/send?text=<?= $urlEncode ?>">
+                                                            <i class="fab fa-whatsapp fa-2x text-success"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <a href="<?= base_url('auth/') ?>" class="my-3 btn btn-info btn-block">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-pen"></i>
                                         </span>
@@ -151,6 +174,22 @@
     <script src="<?= base_url('assets/') ?>/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="<?= base_url('assets/') ?>/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="<?= base_url('assets/')  ?>/js/demo/datatables-demo.js"></script>
+    <script>
+        function myFunction() {
+            /* Get the text field */
+            var copyText = document.getElementById("myInput");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+
+            /* Alert the copied text */
+            alert("Link Webinar telah disalin");
+        }
+    </script>
 
 
 </body>
