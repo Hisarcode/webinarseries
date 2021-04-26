@@ -43,11 +43,44 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $user['nama']; ?></h5>
-                                    <?php $memberSince = date("d-m-Y", strtotime($user['created_at']));  ?>
-                                    <p class="card-text"><small class="text-muted">Member since <?= $memberSince ?></small></p>
+                                    <p class="card-text"><small class="text-muted"><?= $peserta['instansi'] ?></small></p>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="card shadow mb-4">
+
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-dark">Webinar Mendatang</h6>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th width="5%">No</th>
+                                        <th>Nama Webinar</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-dark">
+
+                                    <?php $no = 1; ?>
+                                    <?php foreach ($list_webinar_next as $wp) : ?>
+
+                                        <tr>
+                                            <th class="text-center"><?= $no; ?></th>
+                                            <th>
+                                                <a href="<?= base_url() . 'peserta/detail_webinar/' . $wp['webinar_id']; ?>">
+                                                    <?= $wp['webinar_nama'] ?>
+                                                </a>
+                                            </th>
+                                        </tr>
+                                        <?php $no++; ?>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+
+                        </div>
+
                     </div>
                 </div>
                 <!-- /.container-fluid -->
