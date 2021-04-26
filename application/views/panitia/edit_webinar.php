@@ -60,9 +60,9 @@ $deskripsi =  preg_replace('/<br\\s*?\/??>/i', '', $webinar['deskripsi']);
                                 Jam: <br>
                                 <p id="jamId">
                                     <input type="text" class="form-control time <?php echo form_error('jam') ? 'is-invalid' : '' ?>" name="jam" value="<?= $webinar['jam']; ?>">
-                                <div class="invalid-feedback">
-                                    <?php echo form_error('jam') ?>
-                                </div><br>
+                                    <div class="invalid-feedback">
+                                        <?php echo form_error('jam') ?>
+                                    </div><br>
                                 </p>
                                 Media: <br>
                                 <select name="media_id" id="media_id" class="form-control <?php echo form_error('media_id') ? 'is-invalid' : '' ?>">
@@ -81,7 +81,6 @@ $deskripsi =  preg_replace('/<br\\s*?\/??>/i', '', $webinar['deskripsi']);
                                 </div><br><br>
                                 Deskripsi:
                                 <textarea class="form-control <?php echo form_error('deskripsi') ? 'is-invalid' : '' ?>"" id=" deskripsi" name="deskripsi" rows="5" style=" resize:none; "><?= $deskripsi; ?></textarea>
-                                <?php var_dump($deskripsi) ?>
                                 <div class="invalid-feedback">
                                     <?php echo form_error('deskripsi') ?>
                                 </div><br><br>
