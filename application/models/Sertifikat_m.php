@@ -11,6 +11,8 @@ class Sertifikat_m extends CI_Model
     public $gambar_sertifikat;
 
 
+
+
     public function __construct()
     {
         parent::__construct();
@@ -115,11 +117,31 @@ class Sertifikat_m extends CI_Model
         $this->sertifikat_id = $this->_generateSertifikatID();
         $this->webinar_id = $post['webinar_id'];
         $this->tanggal_keluar = $post['tanggal_keluar'];
+        $this->updated_at = date('Y-m-d H:i:s');
+        $this->created_at = date('Y-m-d H:i:s');
 
         $this->gambar_sertifikat = $this->_uploadGambarSertifikat($this->sertifikat_id);
 
 
         return $this->db->insert($this->_table, $this);
+    }
+
+    public function updateDataSertifikat()
+    {
+        $post = $this->input->post();
+        $this->sertifikat_id = $post['sertifikat_id'];
+        $this->webinar_id = $post['webinar_id'];
+        $this->tanggal_keluar = $post['tanggal_keluar'];
+        $this->updated_at = date('Y-m-d H:i:s');
+
+
+        if (!empty($_FILES["gambar_sertifikat"]["name"])) {
+            $this->gambar_sertifikat = $this->_uploadGambarSertifikat($this->sertifikat_id);
+        } else {
+            $this->gambar_sertifikat  = $post["old_gambar_sertifikat"];
+        }
+
+        return $this->db->update($this->_table, $this, array('sertifikat_id' => $this->sertifikat_id));
     }
 
     public function updateDataSertikat()
