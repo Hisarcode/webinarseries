@@ -30,9 +30,9 @@ class Auth extends CI_Controller
             // google auth
             $google_client = new Google_Client();
 
-            $google_client->setClientId('134942420751-jh6sbr41ee9s4t9iftujtj1dursi1b0k.apps.googleusercontent.com'); //Define your ClientID
+            $google_client->setClientId('xxxx'); //Define your ClientID
 
-            $google_client->setClientSecret('eIVCWOdKECvLgAKLhy3Pmf9A'); //Define your Client Secret Key
+            $google_client->setClientSecret('xxxxxxx'); //Define your Client Secret Key
 
             $google_client->setRedirectUri(base_url() . 'auth/'); //Define your Redirect Uri
 
