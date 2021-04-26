@@ -37,8 +37,8 @@
 
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= $user['nama']; ?></h5>
-                                    <p class="card-text"><small class="text-muted">Member since <?= $user['created_at']; ?></small></p>
+                                    <h5 class="card-title text-dark"><?= $user['nama']; ?></h5>
+                                    <p class="card-text"><small class="text-muted">JURUSAN INFORMATIKA <br>FAKULTAS TEKNIK <br>UNIVERSITAS TANJUNGPURA</small></p>
                                 </div>
                             </div>
                         </div>
