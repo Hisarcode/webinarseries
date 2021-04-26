@@ -180,4 +180,75 @@ class Peserta extends CI_Controller
         $data['peserta'] = $this->db->get()->row_array();
         $this->load->view('peserta/profil', $data);
     }
+    public function edit_profil()
+    {
+        $data['title'] = 'Edit Profil';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->join('peserta', 'peserta.id_user = user.id');
+        $this->db->where('email', $this->session->userdata('email'));
+        $data['peserta'] = $this->db->get()->row_array();
+
+
+        $rules = [
+            [
+                'field' => 'nama',
+                'label' => 'Nama',
+                'rules' => 'required|trim',
+                'errors' => [
+                    'required' => 'Nama Belum  Diisi'
+                ]
+            ],
+            [
+                'field' => 'instansi',
+                'label' => 'Instansi',
+                'rules' => 'required|trim',
+                'errors' => [
+                    'required' => 'Instansi Belum  Diisi'
+                ]
+            ]
+        ];
+        $validation = $this->form_validation;
+        $validation->set_rules($rules);
+
+        if ($validation->run()) {
+            $post = $this->input->post();
+            if (!empty($_FILES["fotoprofil"]["name"])) {
+
+                $config['upload_path'] = './assets/img/profile/';
+                $config['allowed_types'] = 'jpeg|jpg|png';
+                $config['file_name'] = $post['user_id'];
+                $config['overwrite'] = true;
+
+                $config['max_size'] = 30000;
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload("fotoprofil")) {
+
+                    $image = $this->upload->data("file_name");
+                } else {
+                    $image = "default.jpg";
+                }
+            } else {
+                $image  = $post["old_image"];
+            };
+
+            $updateData = array(
+                'nama' => $post['nama'],
+                'image' => $image,
+                'updated_at' => date('Y-m-d H:i:s')
+            );
+
+            $instansi = $post['instansi'];
+            $user_id = $post['user_id'];
+            $this->db->where('id', $post['user_id']);
+            $this->db->update('user', $updateData);
+            $this->db->update('peserta', array('instansi' => $instansi), "id_user = $user_id");
+            $this->session->set_flashdata('category_success', 'Data Berhasil Diubah');
+            redirect('peserta');
+        }
+
+        $this->load->view('peserta/edit_profil', $data);
+    }
 }
