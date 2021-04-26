@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Webinar_Peserta_m extends CI_Model
+class Webinar_peserta_m extends CI_Model
 {
     private $_table = 'webinar_peserta';
 
@@ -15,6 +15,14 @@ class Webinar_Peserta_m extends CI_Model
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function getJumlahPeserta()
+    {
+        $this->db->select();
+        $this->db->from('user');
+        $this->db->where('role_id', 3);
+        return $this->db->count_all_results();
     }
 
     public function hasRegistered($webinarId, $userId)
