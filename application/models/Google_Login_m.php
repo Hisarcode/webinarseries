@@ -1,5 +1,5 @@
 <?php
-class Google_Login_m extends CI_Model
+class Google_login_m extends CI_Model
 {
     function Is_already_register($id)
     {
