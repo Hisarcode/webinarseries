@@ -6,12 +6,15 @@ class Webinar_m extends CI_Model
     private $_table = 'webinar';
     public $webinar_id;
     public $webinar_nama;
+    public $jenis_webinar = 1;
     public $tanggal;
+    public $tanggal_sampai;
     public $jam;
     public $webinar_media_id;
     public $narasumber;
     public $poster;
     public $created_at;
+    public $updated_at;
     public $is_active = 1;
     public $deskripsi;
     public $link_media;
@@ -26,6 +29,30 @@ class Webinar_m extends CI_Model
     public function getJumlahWebinar()
     {
         return $this->db->count_all($this->_table);
+    }
+
+    public function getJumlahWebinarNext()
+    {
+        $this->db->select();
+        $this->db->from($this->_table);
+        $this->db->where('tanggal >= NOW()');
+        return $this->db->count_all_results();
+    }
+
+    public function getListWebinarNext()
+    {
+        $this->db->select();
+        $this->db->from($this->_table);
+        $this->db->where('tanggal >= NOW()');
+        return $this->db->get()->result_array();
+    }
+
+    public function getJumlahWebinarEnd()
+    {
+        $this->db->select();
+        $this->db->from($this->_table);
+        $this->db->where('tanggal < NOW()');
+        return $this->db->count_all_results();
     }
 
     private function _generateWebinarID()
@@ -73,11 +100,6 @@ class Webinar_m extends CI_Model
             [
                 'field' => 'media_id',
                 'label' => 'Media',
-                'rules' => 'required'
-            ],
-            [
-                'field' => 'narasumber',
-                'label' => 'Narasumber',
                 'rules' => 'required'
             ]
         ];
@@ -140,15 +162,34 @@ class Webinar_m extends CI_Model
         $post = $this->input->post();
         $this->webinar_id = $this->_generateWebinarID();
         $this->webinar_nama =  htmlspecialchars($post['webinar_nama']);
+        $this->jenis_webinar =  htmlspecialchars($post['jenis_webinar']);
         $strTanggal = date("Y-m-d", strtotime($post['tanggal']));
         $this->tanggal =  $strTanggal;
+        $this->tanggal_sampai = $strTanggal;
+
+        if (isset($post['tanggal_sampai'])) {
+
+            $strTanggalSampai = date("Y-m-d", strtotime($post['tanggal_sampai']));
+            $this->tanggal_sampai =  $strTanggalSampai;
+        }
 
         $this->jam =  $post['jam'];
         $this->webinar_media_id = $post['media_id'];
         $this->deskripsi = nl2br($post['deskripsi']);
         $this->link_media = $post['link_media'];
-        $this->narasumber = $post['narasumber'];
+        $narasumberPost = $post['narasumber'];
+        $total = count($narasumberPost);
+        $this->narasumber = '';
+        //melakukan perulangan input
+        for ($i = 0; $i < $total; $i++) {
+            $this->narasumber .= $narasumberPost[$i];
+            if ($i <> $total - 1) {
+                $this->narasumber .= ', ';
+            }
+        }
         $this->created_at = date('Y-m-d H:i:s');
+        $this->updated_at = date('Y-m-d H:i:s');
+
 
         $this->poster = $this->_uploadPoster($this->webinar_id);
 
@@ -161,11 +202,14 @@ class Webinar_m extends CI_Model
         $post = $this->input->post();
         $this->webinar_id = $post["webinar_id"];
         $this->webinar_nama =  htmlspecialchars($post['webinar_nama']);
+        $this->jenis_webinar =  htmlspecialchars($post['jenis_webinar']);
         $this->tanggal =  $post['tanggal'];
         $this->jam =  $post['jam'];
         $this->webinar_media_id = $post['media_id'];
         $this->deskripsi = nl2br($post['deskripsi']);
+        $this->link_media = $post['link_media'];
         $this->narasumber = $post['narasumber'];
+        $this->updated_at = date('Y-m-d H:i:s');
 
 
         if (!empty($_FILES["poster"]["name"])) {
