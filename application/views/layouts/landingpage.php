@@ -120,7 +120,7 @@
     </div>
   </section>
   <!-- Optional JavaScript; choose one of the two! -->
-  <footer class="border-top bg-dark text-light">
+  <footer class="border-top bg-dark py-4 text-light">
     <p class="text-center my-auto">&copy; <?= date('Y') == '2021' ? date('Y') : '2021-' . date('Y') ?> Jurusan Informatika Universitas Tanjungpura</p>
   </footer>
   <!-- Option 1: Bootstrap Bundle with Popper -->
