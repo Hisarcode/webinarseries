@@ -26,6 +26,12 @@ class Peserta extends CI_Controller
     {
         $data['title'] = 'Dashboard Peserta';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->join('peserta', 'peserta.id_user = user.id');
+        $this->db->where('email', $this->session->userdata('email'));
+        $data['peserta'] = $this->db->get()->row_array();
+        $data['list_webinar_next'] = $this->webinar->getListWebinarNext();
         $this->load->view('peserta/index', $data);
     }
 
