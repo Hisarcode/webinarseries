@@ -25,6 +25,8 @@ class Panitia extends CI_Controller
         $data['title'] = 'Dashboard Panitia';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['jumlah_webinar'] = $this->webinar->getJumlahWebinar();
+        $data['jumlah_webinar_next'] = $this->webinar->getJumlahWebinarNext();
+        $data['jumlah_webinar_end'] = $this->webinar->getJumlahWebinarEnd();
         $this->load->view('panitia/index', $data);
     }
 
