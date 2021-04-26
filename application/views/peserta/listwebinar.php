@@ -37,52 +37,48 @@
                         <div class="alert alert-danger" role="alert"> <?= $this->session->flashdata('category_error') ?> </div>
                     <?php endif; ?>
 
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4"></div>
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama Webinar</th>
-                                    <th>Jadwal</th>
-                                    <th>Narasumber</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-dark">
-                                <?php $i =  1; ?>
+
+
+                    <div class="tab-content">
+
+                        <div class="tab-pane active" role="tabpanel" id="card">
+                            <div class="row justify-content center">
+
 
                                 <?php foreach ($webinar as $wb) : ?>
-                                    <tr>
-                                        <th><?= $i; ?></th>
-                                        <th><?= $wb['webinar_nama']; ?></th>
-                                        <th><?php $ymd = DateTime::createFromFormat('d/m/Y', $wb['tanggal'])->format('d F Y');
-                                            echo $ymd; ?> , <?= $wb['jam'] ?> WIB</th>
-                                        <th><?= $wb['narasumber'] ?></th>
-                                        <th>
-                                            <a href="<?= base_url() . 'peserta/detail_webinar/' . $wb['webinar_id']; ?>" class="btn btn-info btn-icon-split btn-sm">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-info-circle"></i>
-                                                </span>
-                                                <span class="text">Detail</span>
-                                            </a>
-                                            <?php if ($wb['is_register'] == 0) : ?>
-
-                                                <a href="<?= base_url() . 'peserta/registrasi_webinar/' . $wb['webinar_id'] . '/' . $user['id'] ?>" class="btn btn-success btn-icon-split btn-sm" onclick="return confirm('Yakin?');">
+                                    <div class="col-md-6 col-lg-4  mb-3">
+                                        <div class="card">
+                                            <img class="card-img-top" src="<?= base_url('upload/webinar/') . $wb['poster']; ?>" alt="<?= 'Poster ' . $wb['webinar_nama']; ?>">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?= $wb['webinar_nama']; ?></h5>
+                                                <p class="card-text"><?= $wb['tanggal']; ?></p>
+                                                <a href="<?= base_url() . 'peserta/detail_webinar/' . $wb['webinar_id']; ?>" class="btn btn-info btn-icon-split btn-sm">
                                                     <span class="icon text-white-50">
-                                                        <i class="fas fa-check"></i>
+                                                        <i class="fas fa-info-circle"></i>
                                                     </span>
-                                                    <span class="text">Ikuti</span>
+                                                    <span class="text">Detail</span>
                                                 </a>
-                                            <?php endif; ?>
+                                                <?php if ($wb['is_register'] == 0) : ?>
 
-                                        </th>
-                                    </tr>
-                                    <?php $i++; ?>
+                                                    <a href="<?= base_url() . 'peserta/registrasi_webinar/' . $wb['webinar_id'] . '/' . $user['id'] ?>" class="btn btn-success btn-icon-split btn-sm" onclick="return confirm('Yakin?');">
+                                                        <span class="icon text-white-50">
+                                                            <i class="fas fa-check"></i>
+                                                        </span>
+                                                        <span class="text">Ikuti</span>
+                                                    </a>
+                                                <?php endif; ?>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 <?php endforeach; ?>
-                            </tbody>
-                        </table>
+
+                            </div>
+                        </div>
                     </div>
+
+
 
                 </div>
                 <!-- /.container-fluid -->
