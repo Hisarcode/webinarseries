@@ -76,7 +76,7 @@
                                                     </span>
                                                     <span class="text">Lihat</span>
                                                 </a>
-                                                <a href="<?= base_url() . 'panitia/detail_webinar/' . $se['sertifikat_id']; ?>" class="btn btn-info btn-icon-split btn-sm" onclick="return confirm('Yakin?');">
+                                                <a href="<?= base_url() . 'panitia/edit_sertifikat/' . $se['sertifikat_id']; ?>" class="btn btn-info btn-icon-split btn-sm" onclick="return confirm('Yakin?');">
                                                     <span class="icon text-white-50">
                                                         <i class="fas fa-pen"></i>
                                                     </span>
