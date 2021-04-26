@@ -36,9 +36,7 @@
                             <h3 class="my-4 font-weight-bold text-dark"><?= $webinar['webinar_nama'] ?></h3>
                             <div class="row">
                                 <div class="col-sm col-lg-8">
-                                    <div class="mb-4" style="width:600px;">
-                                        <img class="img-fluid shadow-lg ml-lg-5 mb-4" style="max-width: 80%;" src="<?= base_url('upload/webinar/') . $webinar['poster']; ?>">
-                                    </div>
+                                    <img class="img-fluid col-lg-6 mb-3" style="margin-left:-10px" height="auto" src="<?= base_url('upload/webinar/') . $webinar['poster']; ?>">
                                     <div class="card mb-4">
                                         <div class="card-header">
                                             <h6 class="m-0 font-weight-bold text-primary"> Deskripsi Webinar </h6>
