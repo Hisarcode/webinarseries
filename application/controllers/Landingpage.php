@@ -7,7 +7,7 @@ class Landingpage extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Webinar_m', 'webinar');
-        $this->load->model('Webinar_Peserta_m', 'webinar_peserta');
+        $this->load->model('Webinar_peserta_m', 'webinar_peserta');
     }
 
     public function index()
